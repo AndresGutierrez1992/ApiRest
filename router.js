@@ -5,7 +5,7 @@ const controladorUsuario = require("./controller/usuario.controller")
 const controladorProducto = require("./controller/producto.controller")
 const controladorCliente = require("./controller/cliente.controller")
 
-router.get('/',controladorUsuario.obtenerUsuarios);
+router.get('/usuarios',controladorUsuario.obtenerUsuarios);
 
 router.post('/usuarios', controladorUsuario.crearUsuario);
 
@@ -18,7 +18,7 @@ router.delete('/usuarios/:id', controladorUsuario.eliminarUsuario);
 
 
 
-router.get('/',controladorProducto.consultar);
+router.get('/productos',controladorProducto.consultar);
 
 router.post('/productos', controladorProducto.crearProducto);
 
@@ -30,7 +30,7 @@ router.delete('/productos/:id', controladorProducto.eliminarProducto);
 
 
 
-router.get('/',controladorCliente.consultar);
+router.get('/clientes',controladorCliente.consultar);
 
 router.post('/clientes', controladorCliente.crearCliente);
 
