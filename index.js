@@ -22,6 +22,17 @@ app.get("/v1/productos", (req, res) => {
     res.render("pages/index", { productos });
 });
 
+
+app.get("/v1/about", (req,res)=>{
+    res.render("pages/about")
+})
+
+
+app.get("/v1/formulario", (req,res)=>{
+    res.render("pages/form")
+})
+
+
 app.listen(9090, function() {
     console.log("conectado")
 });

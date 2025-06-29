@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body class="container">
+    <header><%- include('../partials/header'); %></header>
+
+    <main class="container py-5 text-center">
+    
+          <section class="d-flex justify-content-center align-items-center vh-100 bg-light">
+            <div class="card shadow p-4" style="width: 100%; max-width: 400px; border-top: 5px solid #007bff;">
+              <h2 class="text-center text-primary mb-4">Iniciar sesión</h2>
+          
+              <form class="needs-validation" novalidate>
+                <!-- Email -->
+                <div class="mb-3">
+                  <label for="correo" class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control" id="correo" placeholder="ejemplo@correo.com" required>
+                  <div class="invalid-feedback">Ingresa un correo válido.</div>
+                </div>
+          
+                <!-- Contraseña con ojito -->
+                <div class="mb-3">
+                  <label for="contrasena" class="form-label">Contraseña</label>
+                  <div class="input-group">
+                    <input type="password" class="form-control" id="contrasena" placeholder="Tu contraseña" required minlength="6">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                  <div class="invalid-feedback">La contraseña es obligatoria (mínimo 6 caracteres).</div>
+                </div>
+          
+                <!-- Recordar -->
+                <div class="form-check mb-3 text-start">
+                  <input class="form-check-input" type="checkbox" id="recordar">
+                  <label class="form-check-label" for="recordar">Recordar contraseña</label>
+                </div>
+          
+                <!-- Botón de login -->
+                <div class="d-grid mb-3">
+                  <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
+          
+                <!-- Divider -->
+                <div class="text-center text-muted mb-2">
+                  o inicia sesión con
+                </div>
+          
+                <!-- Redes sociales -->
+                <div class="d-flex justify-content-between">
+                  <button type="button" class="btn btn-outline-danger w-100 me-1">
+                    <i class="bi bi-google me-2"></i> Google
+                  </button>
+                  <button type="button" class="btn btn-outline-primary w-100 mx-1">
+                    <i class="bi bi-facebook me-2"></i> Facebook
+                  </button>
+                  <button type="button" class="btn btn-outline-dark w-100 ms-1">
+                    <i class="bi bi-github me-2"></i> GitHub
+                  </button>
+                </div>
+              </form>
+            </div>
+          </section>
+          
+        </div>
+      </div>
+    </main>
+
+    <footer><%- include('../partials/footer'); %></footer>
+  </body>
+</html>
