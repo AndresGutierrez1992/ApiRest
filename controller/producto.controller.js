@@ -1,16 +1,15 @@
 const modeloproducto = require("../models/productos.models");
 
-exports.consultar=(req, res)=>{
-  modeloproducto
-    .find()
-    .then((producto) => {
-      console.log("producto encontrados:", producto);
-    })
-    .catch((err) => {
-      console.error("Error al buscar productos:", err);
-    });
-}
 
+
+module.exports.consultarProductos =async function() {
+  try {
+    const productos = await modeloproducto.find();
+    return productos;
+  } catch (error) {
+    throw error;
+  }
+}
 
 
 exports.crearProducto = async (req, res) => {
