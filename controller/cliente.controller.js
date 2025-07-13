@@ -1,13 +1,14 @@
 const modeloCliente = require("../models/cliente.models");
 
-module.exports.consultarClientes =async function() {
+exports.obtenerClientes = async function (req, res) {
   try {
     const clientes = await modeloCliente.find();
-    return clientes;
+    res.json(clientes);
   } catch (error) {
-    throw error;
+    console.error("Error al consultar clientes:", error);
+    res.status(500).json({ error: "Error al consultar clientes" });
   }
-}
+};
 
 
 exports.crearCliente = async (req, res) => {

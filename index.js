@@ -9,28 +9,12 @@ app.set("views", path.join(__dirname,"./views/"))
 app.use(exp.urlencoded({ extended: true }));
 app.use(exp.json());
 
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+
+
 
 app.use("/v1",enrutador)
-
-app.get("/v1/productos", (req, res) => {
-    const productos = req.productos;
-   
-    if (!productos) {
-        return res.status(500).send("No se encontraron productos");
-    }
-    
-    res.render("pages/index", { productos });
-});
-
-
-app.get("/v1/about", (req,res)=>{
-    res.render("pages/about")
-})
-
-
-app.get("/v1/formulario", (req,res)=>{
-    res.render("pages/form")
-})
 
 
 app.listen(9090, function() {

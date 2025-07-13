@@ -1,13 +1,15 @@
 const modeloUsuario = require("../models/usuario.models");
 
-module.exports.obtenerUsuarios =async function() {
+
+exports.obtenerUsuarios = async function(req, res) {
   try {
     const usuarios = await modeloUsuario.find();
-    return usuarios;
+    res.json(usuarios); 
   } catch (error) {
-    throw error;
+    console.error(error);
+    res.status(500).send("Error al obtener usuarios");
   }
-}
+};
   
 
 exports.crearUsuario = async (req, res) => {
