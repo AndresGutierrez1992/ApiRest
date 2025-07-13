@@ -13,10 +13,10 @@ router.delete("/usuarios/:id", controladorUsuario.eliminarUsuario);
 router.get("/productos", async (req, res) => {
   try {
     const productos = await controladorProducto.obtenerProductos();
-    res.render("pages/productos", { productos });
+    res.render("pages/productos", { productos});
   } catch (err) {
     console.error("Error al obtener productos:", err);
-    res.status(500).send("Error interno del servidor");
+    res.status(500).render("pages/error");
   }
 });
 
