@@ -182,9 +182,9 @@
       <% productos.forEach(function(producto) { %>
         <tr>
           <td><%= producto.nombre %></td>
-          <td><%= producto.descripcion %></td>
+          <td>vacio</td>
           <td>$<%= producto.precio %></td>
-          <td><%= producto.stock %></td>
+          <td>vacio</td>
           <td class="actions">
            <button class="edit-btn" onclick="abrirModalEditar('<%= producto._id %>', '<%= producto.nombre %>', '<%= producto.descripcion %>', '<%= producto.precio %>', '<%= producto.stock %>')">✏️ Editar</button>
 
