@@ -172,9 +172,9 @@
         <button id="btnAbrirModal" class="new-btn">➕ Nuevo Producto</button>
       <tr>
         <th>Nombre</th>
-        <th>Descripción</th>
+        <th>vacio</th>
         <th>Precio</th>
-        <th>Stock</th>
+        <th>vacio</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -186,9 +186,8 @@
           <td>$<%= producto.precio %></td>
           <td><%= producto.stock %></td>
           <td class="actions">
-            <a href="/v1/productos/editar/<%= producto._id %>">
-              <button class="edit-btn">✏️ Editar</button>
-            </a>
+           <button class="edit-btn" onclick="abrirModalEditar('<%= producto._id %>', '<%= producto.nombre %>', '<%= producto.descripcion %>', '<%= producto.precio %>', '<%= producto.stock %>')">✏️ Editar</button>
+
 
             <form action="/v1/productos/<%= producto._id %>?_method=DELETE" method="POST" style="display:inline;">
               <button type="submit" class="delete-btn" onclick="return confirm('¿Estás seguro de eliminar este producto?')">🗑️ Eliminar</button>
@@ -208,19 +207,35 @@
       <label>Nombre:</label>
       <input type="text" name="nombre" required>
 
-      <label>Descripción:</label>
-      <textarea name="descripcion" rows="3"></textarea>
-
+    
       <label>Precio:</label>
       <input type="number" name="precio" step="0.01" required>
-
-      <label>Stock:</label>
-      <input type="number" name="stock" required>
 
       <button type="submit">Crear Producto</button>
     </form>
   </div>
 </div>
+
+<!-- Modal Editar Producto -->
+<div id="modalEditarProducto" class="modal">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarModalEditar()">&times;</span>
+    <h2>Editar Producto</h2>
+    <form id="formEditarProducto" method="POST">
+      <input type="hidden" name="_method" value="PUT">
+      <label>Nombre:</label>
+      <input type="text" name="nombre" id="editarNombre" required>
+
+      
+      <label>Precio:</label>
+      <input type="number" name="precio" id="editarPrecio" step="0.01" required>
+
+     
+      <button type="submit">Guardar Cambios</button>
+    </form>
+  </div>
+</div>
+
 
 <script>
   const modal = document.getElementById("modalNuevoProducto");
@@ -236,6 +251,31 @@
   }
 
   window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
+  function abrirModalEditar(id, nombre, descripcion, precio, stock) {
+    const modal = document.getElementById("modalEditarProducto");
+    modal.style.display = "block";
+
+    // Precargar datos
+    document.getElementById("editarNombre").value = nombre;
+    document.getElementById("editarPrecio").value = precio;
+
+    // Actualiza la acción del form
+    document.getElementById("formEditarProducto").action = `/v1/productos/${id}?_method=PUT`;
+  }
+
+  function cerrarModalEditar() {
+    const modal = document.getElementById("modalEditarProducto");
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById("modalEditarProducto");
     if (event.target == modal) {
       modal.style.display = "none";
     }
