@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+
+
+  <body class="container">
+    <header><%- include('../partials/header'); %><header>
+
+   
+        <h1 class="display-4 fw-bold text-center">Catalogo</h1>
+        <p class="lead text-center mb-5">Una solución simple, moderna y atractiva para tu sitio web.</p>
+    
+        <h2 class="text-primary mb-4">Lista de productos</h2>
+    
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+          <% productos.forEach(producto => { %>
+            <div class="col">
+              <div class="card h-100 shadow-sm">
+                <img src="https://www.soundpark.news/img/2022/11/01/mia-khalifa_x1x_x1x.jpg?__scale=w:1200,h:900,t:2" 
+                     class="card-img-top" alt="Mia Khalifa">
+                <div class="card-body">
+                  <h5 class="card-title"><%= producto.nombre %></h5>
+                  <p class="card-text">$<%= producto.precio %></p>
+                  <button>Agregar ala habitacion</button>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+    
+        <div class="text-center mt-5">
+          <a href="#servicios" class="btn btn-custom btn-lg">Saber más</a>
+        </div>
+
+    <footer><%- include('../partials/footer'); %></footer>
+    
+ 
+  </body>
+</html>
