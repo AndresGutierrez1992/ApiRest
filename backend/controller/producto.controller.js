@@ -1,4 +1,4 @@
-const modeloproducto = require("../models/productos.models");
+const modeloproducto = require("../../backend/models/productos.models");
 
 
 
@@ -6,8 +6,7 @@ exports.obtenerProductos = async (req, res) => {
   try {
     const productos = await modeloproducto.find();
     console.log("Productos:", productos);
-
-    res.render("pages/productos", { productos });
+    res.json(productos)
   } catch (err) {
     console.error("Error al obtener productos:", err);
     res.status(500).send("Error interno del servidor");
@@ -33,7 +32,7 @@ exports.crearProducto = async (req, res) => {
   }
 };
 
-// Actualizar un producto existente
+
 exports.actualizarProducto = async (req, res) => {
   const id = req.params.id;
   const datosActualizados = {
@@ -54,7 +53,7 @@ exports.actualizarProducto = async (req, res) => {
   }
 };
 
-// Eliminar un producto
+
 exports.eliminarProducto = async (req, res) => {
   const idProducto = req.params.id;
 
