@@ -9,8 +9,8 @@ app.set("views", path.join(__dirname,"./views/"))
 app.use(exp.urlencoded({ extended: true }));
 app.use(exp.json());
 
-// const methodOverride = require('method-override');
-// app.use(methodOverride('_method'));
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 
 
 
