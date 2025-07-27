@@ -155,7 +155,7 @@
           <td><%= new Date(cliente.fechaRegistro).toLocaleDateString() %></td>
           <td class="actions">
             <button class="edit-btn" onclick="abrirModalEditar('<%= cliente._id %>', '<%= cliente.correo %>')">✏️ Editar</button>
-            <form action="/clientes/<%= cliente._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <form action="/v1/clientes/<%= cliente._id %>?_method=DELETE" method="POST" style="display:inline;">
               <button type="submit" class="delete-btn" onclick="return confirm('¿Eliminar este cliente?')">🗑️ Eliminar</button>
             </form>
           </td>
@@ -169,7 +169,7 @@
     <div class="modal-contenido">
       <span class="cerrar">&times;</span>
       <h2>Nuevo Cliente</h2>
-      <form action="/clientes" method="POST">
+      <form action="/v1/clientes" method="POST">
         <label>Correo:</label>
         <input type="email" name="correo" required />
 
@@ -200,26 +200,47 @@
     </div>
   </div>
 
+
+
   <script>
-    const modal = document.getElementById("modalNuevoCliente");
-    const btn = document.getElementById("btnAbrirModal");
-    const cerrarBtn = document.getElementsByClassName("cerrar")[0];
-
-    btn.onclick = () => modal.style.display = "block";
-    cerrarBtn.onclick = () => modal.style.display = "none";
-    window.onclick = e => {
-      if (e.target === modal) modal.style.display = "none";
+    const modalNuevo = document.getElementById("modalNuevoCliente");
+    const btnAbrirModal = document.getElementById("btnAbrirModal");
+    const cerrarNuevo = modalNuevo.querySelector(".cerrar");
+  
+    btnAbrirModal.onclick = function () {
+      modalNuevo.style.display = "block";
     };
-
+  
+    cerrarNuevo.onclick = function () {
+      modalNuevo.style.display = "none";
+    };
+  
+    window.onclick = function (event) {
+      if (event.target === modalNuevo) {
+        modalNuevo.style.display = "none";
+      }
+  
+      if (event.target === document.getElementById("modalEditarCliente")) {
+        cerrarModalEditar();
+      }
+    };
+  
     function abrirModalEditar(id, correo) {
-      document.getElementById("modalEditarCliente").style.display = "block";
+      const modalEditar = document.getElementById("modalEditarCliente");
+      modalEditar.style.display = "block";
+  
+      // Precargar datos
       document.getElementById("editarCorreo").value = correo;
-      document.getElementById("formEditarCliente").action = `/clientes/${id}?_method=PUT`;
+  
+      // Actualizar la acción del formulario
+      document.getElementById("formEditarCliente").action = `/v1/clientes/${id}?_method=PUT`;
     }
-
+  
     function cerrarModalEditar() {
-      document.getElementById("modalEditarCliente").style.display = "none";
+      const modalEditar = document.getElementById("modalEditarCliente");
+      modalEditar.style.display = "none";
     }
   </script>
+  
 </body>
 </html>
