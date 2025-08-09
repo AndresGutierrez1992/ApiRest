@@ -38,28 +38,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // EDITAR PRODUCTO - Cargar datos
-  document.querySelectorAll(".btn-warning").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const row = this.closest("tr");
-      const celdas = row.querySelectorAll("td");
+ document.querySelectorAll(".btn-warning").forEach((btn) => {
+  btn.addEventListener("click", function () {
+    const row = this.closest("tr");
+    const celdas = row.querySelectorAll("td");
 
-      document.getElementById("edit-nombre").value = celdas[1].innerText;
-      document.getElementById("edit-descripcion").value = celdas[2].innerText;
-      document.getElementById("edit-url").value = celdas[3].querySelector("img").src;
-      document.getElementById("edit-precio").value = parseFloat(celdas[4].innerText.replace("$", "").trim());
-      document.getElementById("edit-stock").value = celdas[5].innerText;
-      document.getElementById("edit-categoria").value = celdas[6].innerText;
+    document.getElementById("edit-nombre").value = celdas[1].innerText;
+    document.getElementById("edit-descripcion").value = celdas[2].innerText;
+    document.getElementById("edit-url").value = celdas[3].querySelector("img").src;
+    document.getElementById("edit-precio").value = parseFloat(celdas[4].innerText.replace("$", "").trim());
+    document.getElementById("edit-stock").value = celdas[5].innerText;
+    document.getElementById("edit-categoria").value = celdas[6].innerText;
 
-      const form = document.getElementById("formEditarProducto");
-      form.dataset.id = row.querySelector("form").action.split("/").pop().split("?")[0];
-    });
+    // ✅ Guardamos el ID directo desde el botón
+    const idProducto = this.dataset.id;
+    document.getElementById("formEditarProducto").dataset.id = idProducto;
   });
+});
+
 
   // GUARDAR CAMBIOS
   if (formEditar) {
     formEditar.addEventListener("submit", async (e) => {
       e.preventDefault();
       const id = formEditar.dataset.id;
+      console.log("ID del producto a editar:", id);
       if (!id) {
         alert("No se ha seleccionado producto.");
         return;

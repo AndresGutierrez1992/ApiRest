@@ -250,13 +250,14 @@
               <td><%= producto.categoria %></td>
               <td class="text-center">
                 <!-- Botón de editar -->
-                <button
-                  class="btn btn-warning btn-sm"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editProductModal"
-                >
-                  <i class="fas fa-edit"></i>
-                </button>
+                <button 
+  class="btn btn-warning btn-sm"
+  data-id="<%= producto._id %>"
+  data-bs-toggle="modal"
+  data-bs-target="#editProductModal">
+  <i class="fas fa-edit"></i>
+</button>
+
                 <!-- Botón de eliminar -->
               
                 <button

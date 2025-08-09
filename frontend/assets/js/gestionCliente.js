@@ -75,7 +75,7 @@ document.querySelectorAll(".btn-editar-cliente").forEach((btn) => {
     const id = btn.dataset.id;
     const correo = btn.dataset.correo;
     const contrasena = btn.dataset.contrasena;
-
+    console.log("Datos del cliente a editar:", id);
     document.getElementById("clienteId").value = id;
     document.getElementById("editCorreo").value = correo;
     document.getElementById("editPassword").value = contrasena;
