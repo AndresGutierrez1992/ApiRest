@@ -15,7 +15,7 @@ router.get("/comida", (req, res) => {
   res.render("pages/comida");
 });
 
-router.get("/jugutes", (req, res) => {
+router.get("/juguetes", (req, res) => {
   res.render("pages/juguetes");
 });
 
