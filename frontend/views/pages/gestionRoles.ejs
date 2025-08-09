@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <%- include('../partials/head') %>
+    <title>Módulo Roles</title>
+  </head>
+
+  <body>
+    <header><%- include('../partials/headerAdmin') %></header>
+    <main>
+      <div class="container my-5">
+        <h2 class="text-center mb-4">Gestión de Roles 🛠️</h2>
+
+        <div class="mb-2 text-end">
+          <button
+            class="btn btn-register"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#registerModal"
+            aria-label="Abrir modal de registro"
+          >
+            +
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped align-middle">
+            <thead class="table-primary text-center">
+              <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (roles && roles.length > 0) { %>
+                <% roles.forEach((rol, index) => { %>
+                  <tr>
+                    <td class="text-center"><%= index + 1 %></td>
+                    <td><%= rol.nombre %></td>
+                    <td><%= rol.descripcion %></td>
+                    <td class="text-center">
+                      <button
+                        class="btn btn-warning btn-sm btn-editar-rol"
+                        data-id="<%= rol._id %>"
+                        data-nombre="<%= rol.nombre %>"
+                        data-descripcion="<%= rol.descripcion %>"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-sm btn-eliminar"
+                        data-id="<%= rol._id %>"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                <% }) %>
+              <% } else { %>
+                <tr>
+                  <td colspan="4" class="text-center">No hay roles registrados.</td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Registrar Rol -->
+    <div
+      class="modal fade"
+      id="registerModal"
+      tabindex="-1"
+      aria-labelledby="registerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content custom-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalLabel">Registrar Rol</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formRegistrarRol">
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre del rol</label>
+                <input type="text" class="form-control" id="nombre" required />
+              </div>
+              <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="descripcion" required />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Registrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Editar Rol -->
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content custom-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Editar Rol</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formEditarRol">
+              <input type="hidden" id="rolId" />
+              <div class="mb-3">
+                <label for="editNombre" class="form-label">Nombre del rol</label>
+                <input type="text" class="form-control" id="editNombre" required />
+              </div>
+              <div class="mb-3">
+                <label for="editDescripcion" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="editDescripcion" required />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer><%- include('../partials/footer') %></footer>
+    <script src="/assets/js/gestionRoles.js"></script>
+  </body>
+</html>

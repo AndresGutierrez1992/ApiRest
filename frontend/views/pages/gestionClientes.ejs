@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <%- include('../partials/head') %>
+    <title>Modulo Clientes</title>
+  </head>
+
+  <body>
+    <header><%- include('../partials/headerAdmin') %></header>
+    <main>
+      <div class="container my-5">
+        <h2 class="text-center mb-4">Gestión de Clientes 🛠️</h2>
+
+        <div class="mb-2 text-end">
+          <button
+            class="btn btn-register"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#registerModal"
+            aria-label="Abrir modal de registro"
+          >
+            +
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped align-middle">
+            <thead class="table-primary text-center">
+              <tr>
+                <th>#</th>
+                <th>Correo</th>
+                <th>Contraseña</th>
+                <th>Fecha De Registro</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (clientes && clientes.length > 0) { %> <%
+              clientes.forEach((cliente, index) => { %>
+              <tr>
+                <td class="text-center"><%= index + 1 %></td>
+                <td><%= cliente.correo %></td>
+                <td><%= cliente.contrasena %></td>
+                <td>
+                  <%= new Date(cliente.fechaRegistro).toLocaleDateString() %>
+                </td>
+                <td class="text-center">
+                  <button
+                    class="btn btn-warning btn-sm btn-editar-cliente"
+                    data-id="<%= cliente._id %>"
+                    data-correo="<%= cliente.correo %>"
+                    data-contrasena="<%= cliente.contrasena %>"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editModal"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
+
+                  <button
+  type="button"
+  class="btn btn-danger btn-sm btn-eliminar"
+  data-id="<%= cliente._id %>"
+>
+  <i class="fas fa-trash"></i>
+</button>
+
+                  </form>
+                </td>
+              </tr>
+              <% }) %> <% } else { %>
+              <tr>
+                <td colspan="5" class="text-center">
+                  No hay clientes registrados.
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="modal fade"
+      id="registerModal"
+      tabindex="-1"
+      aria-labelledby="registerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content custom-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalLabel">Registrarse</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formRegistrarCliente" class="formulario">
+              <div class="mb-3">
+                <label for="email" class="form-label"
+                  ><i class="bi bi-envelope-lock"></i> Ingrese su correo
+                  electrónico</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="Correo electrónico"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label"
+                  ><i class="bi bi-key"></i> Ingrese su contraseña</label
+                >
+                <div class="input-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    id="password"
+                    placeholder="Contraseña"
+                  />
+                  <span class="input-group-text"
+                    ><i class="bi bi-eye"></i
+                  ></span>
+                </div>
+                <label for="passwordVerify" class="form-label"
+                  ><i class="bi bi-key"></i> Verifique su contraseña</label
+                >
+                <div class="input-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="passwordVerify"
+                    id="passwordVerify"
+                    placeholder=" Verifique Contraseña"
+                  />
+                  <span class="input-group-text"
+                    ><i class="bi bi-eye"></i
+                  ></span>
+                </div>
+              </div>
+
+              <div class="form-check mb-3">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="condiciones"
+                />
+                <label class="form-check-label" for="condiciones"
+                  >Aceptar Términos y condiciones</label
+                >
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100 mt-3"
+                id="registro"
+              >
+                Registrarse
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para Editar Cliente -->
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content custom-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Editar Cliente</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="formEditarCliente">
+              <input type="hidden" id="clienteId" />
+              <div class="mb-3">
+                <label for="editCorreo" class="form-label"
+                  >Correo electrónico</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="editCorreo"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editPassword" class="form-label"
+                  >Nueva Contraseña</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="editPassword"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Guardar Cambios
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer><%- include('../partials/footer') %></footer>
+
+    <script src="/assets/js/gestionCliente.js"></script>
+  </body>
+</html>

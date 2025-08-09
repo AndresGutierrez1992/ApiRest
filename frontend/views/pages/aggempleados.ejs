@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <%- include('../partials/head') %>
+  <title>Gestión de Empleados</title>
+</head>
+<body>
+<header>
+  <%- include('../partials/headerAdmin') %>
+</header>
+
+<main>
+  <div class="container my-5">
+    <h2 class="text-center mb-4">Gestión de Empleados 🛠️</h2>
+
+    <div class="mb-2 text-end">
+      <button class="btn btn-register" type="button" data-bs-toggle="modal" data-bs-target="#registerModal">
+        +
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped align-middle">
+        <thead class="table-primary text-center">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cédula</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Fecha Registro</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% if (empleados && empleados.length > 0) { %>
+          <% empleados.forEach((empleado, index) => { %>
+            <tr>
+              <td class="text-center"><%= index + 1 %></td>
+              <td><%= empleado.nombre %></td>
+              <td><%= empleado.apellido %></td>
+              <td><%= empleado.cedula %></td>
+              <td><%= empleado.correo %></td>
+              <td><%= empleado.telefono %></td>
+              <td><%= empleado.direccion %></td>
+              <td><%= new Date(empleado.fechaRegistro).toLocaleDateString() %></td>
+              <td class="text-center">
+                <button class="btn btn-warning btn-sm btn-editar-empleado"
+                  data-id="<%= empleado._id %>"
+                  data-nombre="<%= empleado.nombre %>"
+                  data-apellido="<%= empleado.apellido %>"
+                  data-cedula="<%= empleado.cedula %>"
+                  data-correo="<%= empleado.correo %>"
+                  data-telefono="<%= empleado.telefono %>"
+                  data-direccion="<%= empleado.direccion %>"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editModal">
+                  <i class="fas fa-edit"></i>
+                </button>
+
+                <button type="button" class="btn btn-danger btn-sm btn-eliminar" data-id="<%= empleado._id %>">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="9" class="text-center">No hay empleados registrados.</td>
+          </tr>
+        <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- Modal Registrar -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content custom-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrar Empleado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formRegistrarEmpleado">
+          <input type="text" class="form-control mb-2" id="nombre" placeholder="Nombre" required>
+          <input type="text" class="form-control mb-2" id="apellido" placeholder="Apellido" required>
+          <input type="text" class="form-control mb-2" id="cedula" placeholder="Cédula" required>
+          <input type="email" class="form-control mb-2" id="correo" placeholder="Correo" required>
+          <input type="text" class="form-control mb-2" id="telefono" placeholder="Teléfono" required>
+          <input type="text" class="form-control mb-2" id="direccion" placeholder="Dirección" required>
+          <input type="password" class="form-control mb-2" id="password" placeholder="Contraseña" required>
+          <button type="submit" class="btn btn-primary w-100">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content custom-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Empleado</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditarEmpleado">
+          <input type="hidden" id="editId">
+          <input type="text" class="form-control mb-2" id="editNombre" placeholder="Nombre" required>
+          <input type="text" class="form-control mb-2" id="editApellido" placeholder="Apellido" required>
+          <input type="text" class="form-control mb-2" id="editCedula" placeholder="Cédula" required>
+          <input type="email" class="form-control mb-2" id="editCorreo" placeholder="Correo" required>
+          <input type="text" class="form-control mb-2" id="editTelefono" placeholder="Teléfono" required>
+          <input type="text" class="form-control mb-2" id="editDireccion" placeholder="Dirección" required>
+          <input type="password" class="form-control mb-2" id="editPassword" placeholder="Contraseña" required>
+          <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <%- include('../partials/footer') %>
+</footer>
+<script src="/assets/js/gestionEmpleados.js"></script>
+</body>
+</html>

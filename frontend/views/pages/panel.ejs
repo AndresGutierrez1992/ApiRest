@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+     <%- include('../partials/head') %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/headerAdmin') %>
+    </header>
+    <main class="container my-5">
+        <section id="estadisticas" class="mb-5">
+            <h1 class="text-center mb-5">Estadisticas</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card tarjetaProductos mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Productos </h5>
+                            <p class="card-text fs-4" id="cantidadProductos"><%= productos.length %></p>
+                            <i class="fas fa-box fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card tarjetaFacturas mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Clientes registrados</h5>
+                            <p class="card-text fs-4" id="cantidadClientes"><%= clientes.length %></p>
+                            <i class="fas fa-file-invoice fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card tarjetaClientes mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Empleados</h5>
+                            <p class="card-text fs-4" id="cantidadEmpleados"><%= empleados.length %></p>
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="gestion">
+            <h1 class="text-center mb-4">Gestion</h1>
+            <div class="row text-center justify-content-center">
+                <div class="col-md-4 mb-3">
+                    <a href="aggproductos" class="btn btn-primary w-100 py-3">
+                        <i class="fas fa-box"></i> Gestion de Productos
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <a href="gestionClientes" class="btn btn-primary w-100 py-3">
+                        <i class="fas fa-file-invoice"></i> Gestion de Clientes
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <a href="aggempleados" class="btn btn-primary w-100 py-3">
+                        <i class="fas fa-users"></i> Gestion de Empleados
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+    <%- include('../partials/footer') %>
+    </footer>
+    
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/productos.js"></script>
+    <script src="assets/js/gestionCliente.js"></script>
+    <script src="assets/js/gestionEmpleados.js"></script>
+</body>
+
+</html>

@@ -1,23 +1,57 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="#">Hidden brand</a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="about">About <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="productos">Inicio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="formulario">Inicia Sesion</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+ 
+        <nav class="navbar navbar-expand-lg barra w-100">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="nosotros">
+                    <img class="logo" src="/assets/Imagenes/PetMarket_Logo.png" alt="Logo de PetMarket"
+                        title="Logo de PetMarket" loading="lazy">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Abrir menu de navegacion">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-1">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/v1/">Inicio</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="productosDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false" aria-label="Abrir menu de productos">
+                                Productos
+                            </a>
+                            <ul class="dropdown-menu dropdownMenu" aria-labelledby="productosDropdown">
+                                <li><a class="dropdown-item" href="juguetes">Juguetes</a></li>
+                                <li><a class="dropdown-item" href="comida">Comida</a></li>
+                                <li><a class="dropdown-item" href="accesorios">Accesorios</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#nuestrasMarcas">Marcas</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-1" role="search" style="width: 60%;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button class="btn btn-primary" type="submit">Buscar</button>
+                    </form>
+                    <div class="d-flex ms-auto mt-1">
+                        <a href="carrito" class="btn btn-primary me-2 position-relative"
+                            aria-label="Ir al carrito de compras">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="carrito-badge"
+                                class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger"
+                                style="font-size:0.75rem;">
+                                2
+                                <span class="visually-hidden">productos en el carrito</span>
+                            </span>
+                        </a>
+                        <button class="btn btn-login me-2" type="button" data-bs-toggle="modal"
+                            data-bs-target="#loginModal" aria-label="Abrir modal de inicio de sesion">Iniciar
+                            Sesion</button>
+                        <button class="btn btn-register" type="button" data-bs-toggle="modal"
+                            data-bs-target="#registerModal" aria-label="Abrir modal de registro">Registrarse</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    

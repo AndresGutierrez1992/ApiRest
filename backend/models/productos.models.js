@@ -1,21 +1,41 @@
 const { version } = require('mongoose');
 const mongoose = require('../config/connection')
 
+const productoSchema = new mongoose.Schema({
+  nombre: {
+    type: String,
+    required: true
+  },
+  descripcion: {
+    type: String,
+    required: true
+  },
+  imagen: {
+    type: String,
+    required: true
+  },
+  precio: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  stock: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  categoria: {
+    type: String,
+    required: true,
+    enum: ['accesorios', 'ropa', 'juguetes', 'alimentos'] // Puedes ajustar esto según tus categorías
+  }
+}, {
+  fechaRegistro: {
+        type: Date,
+        default: Date.now
+    }
+});
 
-const esquemaProducto = mongoose.Schema({
-    nombre: String,
-    precio:Number
-    
-},
-
-{
-    versionKey: false
-
-}
-
-);
-
-
-const producto = mongoose.model('producto', esquemaProducto);
+const producto = mongoose.model('producto', productoSchema);
 
 module.exports = producto;
