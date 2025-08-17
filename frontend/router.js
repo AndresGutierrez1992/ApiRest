@@ -6,6 +6,8 @@ const controladorProducto = require("../backend/controller/producto.controller")
 const controladorCliente = require("../backend/controller/cliente.controller");
 const controladorRol = require("../backend/controller/rol.controller");
 
+const { verificarToken, soloAdmin } = require("../backend/middlewares/authMiddleware");
+
 
 router.get("/", (req, res) => {
   res.render("pages/index");
@@ -33,7 +35,7 @@ router.get("/panel", async (req, res) => {
     const productos = await controladorProducto.obtenerProductos(); 
     const empleados = await controladorEmpleado.obtenerEmpleados();
     const clientes = await controladorCliente.obtenerClientes();  
-    res.render("pages/panel", { productos, empleados, clientes }); // PASAMOS productos, empleados y clientes a EJS
+    res.render("pages/panel", { productos, empleados, clientes }); // PASAMOS productos, empleados y clientes a EJS bb
   } catch (error) {
     console.error("Error al cargar el panel:", error);
     res.status(500).render("pages/error", { mensaje: "Error al cargar el panel" });
@@ -85,9 +87,10 @@ router.get("/gestionClientes", async (req, res) => {
     res.status(500).render("pages/error", { mensaje: "Error al cargar clientes" });
   }
 });
-router.post("/gestionClientes", controladorCliente.crearCliente);
-router.put("/gestionClientes/:id", controladorCliente.actualizarCliente);
-router.delete("/gestionClientes/:id", controladorCliente.eliminarCliente);
+router.post("/gestionClientesPublico",controladorCliente.crearClientePublico);
+router.post("/gestionClientes",verificarToken, soloAdmin, controladorCliente.crearCliente);
+router.put("/gestionClientes/:id",verificarToken, soloAdmin, controladorCliente.actualizarCliente);
+router.delete("/gestionClientes/:id",verificarToken, soloAdmin, controladorCliente.eliminarCliente);
 
 
 router.get('/gestionRoles', async (req, res) => {

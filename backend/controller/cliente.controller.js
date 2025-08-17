@@ -1,18 +1,44 @@
 const modeloCliente = require("../models/cliente.models");
 
-// ✅ Crear cliente
+//  Crear cliente
 exports.crearCliente = async (req, res) => {
   try {
-    const nuevoCliente = new modeloCliente(req.body);
-    const clienteGuardado = await nuevoCliente.save();
-    res.status(201).json(clienteGuardado);
+    const { correo, contrasena, rol } = req.body;
+
+    const nuevoCliente = new modeloCliente({
+      correo,
+      contrasena,
+      rol: rol || "cliente" 
+    });
+
+    await nuevoCliente.save();
+    res.status(201).json({ mensaje: "Cliente registrado correctamente", cliente: nuevoCliente });
   } catch (error) {
-    console.error("Error al crear cliente:", error);
-    res.status(400).json({ error: "Error al crear el cliente" });
+    res.status(400).json({ mensaje: "Error al registrar cliente", error: error.message });
   }
 };
 
-// ✅ Obtener todos los clientes
+
+exports.crearClientePublico = async (req, res) => {
+  try {
+    const { correo, contrasena, rol } = req.body;
+
+    const nuevoCliente = new modeloCliente({
+      correo,
+      contrasena,
+      rol: rol || "cliente" 
+    });
+
+    await nuevoCliente.save();
+    res.status(201).json({ mensaje: "Cliente registrado correctamente", cliente: nuevoCliente });
+  } catch (error) {
+    res.status(400).json({ mensaje: "Error al registrar cliente", error: error.message });
+  }
+};
+
+
+
+//  Obtener todos los clientes
 exports.obtenerClientes = async (req, res) => {
   try {
     const clientes = await modeloCliente.find();
@@ -23,7 +49,7 @@ exports.obtenerClientes = async (req, res) => {
   }
 };
 
-// ✅ Obtener un cliente por ID
+// Obtener un cliente por ID
 exports.obtenerClientePorId = async (req, res) => {
   try {
     const cliente = await modeloCliente.findById(req.params.id);
@@ -37,7 +63,7 @@ exports.obtenerClientePorId = async (req, res) => {
   }
 };
 
-// ✅ Actualizar cliente
+//  Actualizar cliente
 exports.actualizarCliente = async (req, res) => {
   try {
     const clienteActualizado = await modeloCliente.findByIdAndUpdate(
@@ -55,7 +81,7 @@ exports.actualizarCliente = async (req, res) => {
   }
 };
 
-// ✅ Eliminar cliente
+// Eliminar cliente
 exports.eliminarCliente = async (req, res) => {
   try {
     const clienteEliminado = await modeloCliente.findByIdAndDelete(req.params.id);

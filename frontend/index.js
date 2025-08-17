@@ -21,5 +21,5 @@ app.use("/v1",enrutador)
 
 
 app.listen(9090, function() {
-    console.log("conectado")
+    console.log("http://localhost:9090/v1")
 });

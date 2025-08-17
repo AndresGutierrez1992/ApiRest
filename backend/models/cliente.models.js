@@ -1,5 +1,6 @@
 const { version } = require('mongoose');
-const mongoose = require('../config/connection')
+const mongoose = require('../config/connection');
+const { validate } = require('./empleado.models');
 
 const esquemaCliente = mongoose.Schema({
 
@@ -16,11 +17,18 @@ const esquemaCliente = mongoose.Schema({
         required: true,
         minLength: 6
     },
+    rol: {
+        type: String,
+        enum: ["cliente", "admin"], // solo puede ser cliente o admin
+        default: "cliente"
+      },
     fechaRegistro: {
         type: Date,
         default: Date.now
-    }
-});
+    },
+},
+{ versionKey: false }
+);
 
 const cliente = mongoose.model('cliente', esquemaCliente);
 

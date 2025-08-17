@@ -17,7 +17,8 @@ const esquemaRol = mongoose.Schema({
         lowercase: true,
         trim: true
     },
-});
+},
+{ versionKey: false });
 
 const rol = mongoose.model('rol', esquemaRol);
 

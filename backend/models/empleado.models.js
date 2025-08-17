@@ -38,7 +38,8 @@ const empleadoSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-});
+},
+{ versionKey: false });
 
 const empleado = mongoose.model('empleado', empleadoSchema);
 

@@ -34,7 +34,8 @@ const productoSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-});
+}, { versionKey: false }
+);
 
 const producto = mongoose.model('producto', productoSchema);
 
