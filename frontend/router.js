@@ -106,4 +106,29 @@ router.get('/gestionRoles/:id', controladorRol.obtenerRolPorId);
 router.put('/gestionRoles/:id', controladorRol.actualizarRol);
 router.delete('/gestionRoles/:id', controladorRol.eliminarRol);
 
+
+
+
+
+// 📄 Mostrar vista para facturas (ejemplo si tienes EJS)
+router.get("/gestionFacturas", verificarToken, soloAdmin, async (req, res) => {
+  try {
+    const facturas = await controladorFactura.obtenerFacturas(req, res);
+    res.render("pages/gestionFacturas", { facturas });
+  } catch (error) {
+    res.status(500).render("pages/error", { mensaje: "Error al cargar gestión de facturas" });
+  }
+});
+
+router.post("/gestionFacturas", verificarToken, controladorFactura.crearFactura);
+
+router.get("/gestionFacturas/:id", verificarToken, controladorFactura.obtenerFacturaPorId);
+
+router.put("/gestionFacturas/:id", verificarToken, soloAdmin, controladorFactura.actualizarFactura);
+
+router.delete("/gestionFacturas/:id", verificarToken, soloAdmin, controladorFactura.eliminarFactura);
+
+module.exports = router;
+
+
 module.exports = router;
