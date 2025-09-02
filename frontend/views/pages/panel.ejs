@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-     <%- include('../partials/head') %>
+    <%- include('../partials/head') %>
 </head>
 
 <body>
@@ -19,6 +18,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Productos </h5>
                             <p class="card-text fs-4" id="cantidadProductos"><%= productos.length %></p>
+
                             <i class="fas fa-box fa-2x"></i>
                         </div>
                     </div>
@@ -27,7 +27,9 @@
                     <div class="card tarjetaFacturas mb-3">
                         <div class="card-body">
                             <h5 class="card-title">Clientes registrados</h5>
-                            <p class="card-text fs-4" id="cantidadClientes"><%= clientes.length %></p>
+                            <p class="card-text fs-4" id="cantidadClientes">
+                                <%= clientes.length %>
+                            </p>
                             <i class="fas fa-file-invoice fa-2x"></i>
                         </div>
                     </div>
@@ -36,12 +38,14 @@
                     <div class="card tarjetaClientes mb-3">
                         <div class="card-body">
                             <h5 class="card-title">Empleados</h5>
-                            <p class="card-text fs-4" id="cantidadEmpleados"><%= empleados.length %></p>
+                            <p class="card-text fs-4" id="cantidadEmpleados">
+                                <%= empleados.length %>
+                            </p>
                             <i class="fas fa-users fa-2x"></i>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </section>
         <section id="gestion">
             <h1 class="text-center mb-4">Gestion</h1>
@@ -65,9 +69,9 @@
         </section>
     </main>
     <footer>
-    <%- include('../partials/footer') %>
+        <%- include('../partials/footer') %>
     </footer>
-    
+
     <script src="assets/js/script.js"></script>
     <script src="assets/js/productos.js"></script>
     <script src="assets/js/gestionCliente.js"></script>

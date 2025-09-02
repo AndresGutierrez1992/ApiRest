@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const svgCaptcha = require("svg-captcha");
+const speakeasy = require("speakeasy");
+const qrcode = require("qrcode");
 
 const controladorEmpleado = require("../backend/controller/empleado.controller");
 const controladorProducto = require("../backend/controller/producto.controller");
 const controladorCliente = require("../backend/controller/cliente.controller");
 const controladorRol = require("../backend/controller/rol.controller");
-
-const { verificarToken, soloAdmin } = require("../backend/middlewares/authMiddleware");
-
+const requireAuth = require("../backend/middlewares/authMiddleware");
 
 router.get("/", (req, res) => {
   res.render("pages/index");
@@ -30,23 +31,13 @@ router.get("/nosotros", (req, res) => {
 });
 
 
-router.get("/panel", async (req, res) => {
-  try {
-    const productos = await controladorProducto.obtenerProductos(); 
-    const empleados = await controladorEmpleado.obtenerEmpleados();
-    const clientes = await controladorCliente.obtenerClientes();  
-    res.render("pages/panel", { productos, empleados, clientes }); // PASAMOS productos, empleados y clientes a EJS bb
-  } catch (error) {
-    console.error("Error al cargar el panel:", error);
-    res.status(500).render("pages/error", { mensaje: "Error al cargar el panel" });
-  }
-});
+
 
 
 
 
 // RUTAS EMPLEADO
-router.get("/aggempleados", async (req, res) => {
+router.get("/aggempleados",requireAuth.requireAuth, async (req, res) => {
   try {
     const empleados = await controladorEmpleado.obtenerEmpleados();
     res.render("pages/aggempleados", { empleados });
@@ -55,13 +46,15 @@ router.get("/aggempleados", async (req, res) => {
     res.status(500).render("pages/error");
   }
 });
-router.post("/aggempleados", controladorEmpleado.crearEmpleado);
-router.put("/aggempleados/:id", controladorEmpleado.actualizarEmpleado);
-router.delete("/aggempleados/:id", controladorEmpleado.eliminarEmpleado);
+router.post("/aggempleados",requireAuth.requireAuth,controladorEmpleado.crearEmpleado);
+router.put("/aggempleados/:id",requireAuth.requireAuth, controladorEmpleado.actualizarEmpleado);
+router.delete("/aggempleados/:id",requireAuth.requireAuth, controladorEmpleado.eliminarEmpleado);
+
+
 
 
 // RUTAS PRODUCTOS
-router.get("/aggproductos", async (req, res) => {
+router.get("/aggproductos", requireAuth.requireAuth, async (req, res) => {
   try {
     const productos = await controladorProducto.obtenerProductos();
     console.log(productos);
@@ -71,15 +64,15 @@ router.get("/aggproductos", async (req, res) => {
     res.status(500).render("pages/error");
   }
 });
+router.post("/aggproductos",requireAuth.requireAuth, controladorProducto.crearProducto);
+router.put("/aggproductos/:id",requireAuth.requireAuth, controladorProducto.actualizarProducto);
+router.delete("/aggproductos/:id",requireAuth.requireAuth, controladorProducto.eliminarProducto);
 
 
-router.post("/aggproductos", controladorProducto.crearProducto);
-router.put("/aggproductos/:id", controladorProducto.actualizarProducto);
-router.delete("/aggproductos/:id", controladorProducto.eliminarProducto);
 
 
 // RUTAS CLIENTES
-router.get("/gestionClientes", async (req, res) => {
+router.get("/gestionClientes", requireAuth.requireAuth, async (req, res) => {
   try {
     const clientes = await controladorCliente.obtenerClientes();
     res.render("pages/gestionClientes", { clientes });
@@ -87,13 +80,13 @@ router.get("/gestionClientes", async (req, res) => {
     res.status(500).render("pages/error", { mensaje: "Error al cargar clientes" });
   }
 });
-router.post("/gestionClientesPublico",controladorCliente.crearClientePublico);
-router.post("/gestionClientes",verificarToken, soloAdmin, controladorCliente.crearCliente);
-router.put("/gestionClientes/:id",verificarToken, soloAdmin, controladorCliente.actualizarCliente);
-router.delete("/gestionClientes/:id",verificarToken, soloAdmin, controladorCliente.eliminarCliente);
+router.post("/gestionClientesPublico",requireAuth.requireAuth,controladorCliente.crearClientePublico);
+router.post("/gestionClientes",requireAuth.requireAuth,controladorCliente.crearCliente);
+router.put("/gestionClientes/:id",requireAuth.requireAuth,controladorCliente.actualizarCliente);
+router.delete("/gestionClientes/:id",requireAuth.requireAuth,controladorCliente.eliminarCliente);
 
 
-router.get('/gestionRoles', async (req, res) => {
+router.get('/gestionRoles',requireAuth.requireAuth, async (req, res) => {
   try {
     const roles = await controladorRol.obtenerRoles();
     res.render("pages/gestionRoles", { roles });
@@ -101,34 +94,149 @@ router.get('/gestionRoles', async (req, res) => {
     res.status(500).render("pages/error", { mensaje: "Error al cargar roles" });
   }
 });
-router.post('/gestionRoles', controladorRol.crearRol);
-router.get('/gestionRoles/:id', controladorRol.obtenerRolPorId);
-router.put('/gestionRoles/:id', controladorRol.actualizarRol);
-router.delete('/gestionRoles/:id', controladorRol.eliminarRol);
+router.post('/gestionRoles',requireAuth.requireAuth, controladorRol.crearRol);
+router.get('/gestionRoles/:id',requireAuth.requireAuth, controladorRol.obtenerRolPorId);
+router.put('/gestionRoles/:id',requireAuth.requireAuth, controladorRol.actualizarRol);
+router.delete('/gestionRoles/:id',requireAuth.requireAuth, controladorRol.eliminarRol);
 
 
 
+router.get("/login", (req, res) => {
+  res.render("pages/login", {
+    error: null,
+    captchaSvg: req.session.captchaSvg || null,
+  });
+});
 
+// Endpoint que genera el captcha
+router.get("/v1/captcha", (req, res) => {
+  const captcha = svgCaptcha.create({
+    size: 5,
+    noise: 2,
+    color: true,
+    background: "#ccf2ff",
+  });
+  req.session.captcha = captcha.text;
+  req.session.captchaSvg = captcha.data;
+  res.type("svg");
+  res.status(200).send(captcha.data);
+});
 
-// 📄 Mostrar vista para facturas (ejemplo si tienes EJS)
-router.get("/gestionFacturas", verificarToken, soloAdmin, async (req, res) => {
-  try {
-    const facturas = await controladorFactura.obtenerFacturas(req, res);
-    res.render("pages/gestionFacturas", { facturas });
-  } catch (error) {
-    res.status(500).render("pages/error", { mensaje: "Error al cargar gestión de facturas" });
+// Procesar login (paso 1: captcha + credenciales)
+router.post("/login", async (req, res) => {
+  const { username, password, captcha } = req.body;
+
+  // Validar captcha
+  const captchaOk =
+    captcha &&
+    req.session.captcha &&
+    captcha.toLowerCase() === req.session.captcha.toLowerCase();
+
+  req.session.captcha = null;
+  req.session.captchaSvg = null;
+
+  if (!captchaOk) {
+    const newCaptcha = svgCaptcha.create({
+      size: 5,
+      noise: 2,
+      color: true,
+      background: "#ccf2ff"
+    });
+    req.session.captcha = newCaptcha.text;
+    req.session.captchaSvg = newCaptcha.data;
+    return res.render("pages/login", {
+      error: "Captcha incorrecto. Inténtalo de nuevo.",
+      captchaSvg: newCaptcha.data,
+    });
+  }
+
+  // Validar credenciales (ejemplo fijo)
+  if (username === "admin" && password === "123456") {
+    // Si ya tiene secret guardado en sesión, no volver a generar QR
+    if (!req.session.twoFactorSecret) {
+      const secret = speakeasy.generateSecret({ name: "MiAppSegura" });
+      req.session.twoFactorSecret = secret.base32;
+
+      // Generar QR solo la primera vez
+      const qrDataUrl = await qrcode.toDataURL(secret.otpauth_url);
+      return res.render("pages/2fa", {
+        qrCode: qrDataUrl,
+        error: null,
+      });
+    }
+
+    // Si ya tiene secret, solo pedir el código
+    return res.render("pages/2fa", {
+      qrCode: null,
+      error: null,
+    });
+
+  } else {
+    const newCaptcha = svgCaptcha.create({
+      size: 5,
+      noise: 2,
+      color: true,
+      background: "#ccf2ff"
+    });
+    req.session.captcha = newCaptcha.text;
+    req.session.captchaSvg = newCaptcha.data;
+    return res.render("pages/login", {
+      error: "Usuario o contraseña incorrectos.",
+      captchaSvg: newCaptcha.data,
+    });
   }
 });
 
-router.post("/gestionFacturas", verificarToken, controladorFactura.crearFactura);
 
-router.get("/gestionFacturas/:id", verificarToken, controladorFactura.obtenerFacturaPorId);
 
-router.put("/gestionFacturas/:id", verificarToken, soloAdmin, controladorFactura.actualizarFactura);
 
-router.delete("/gestionFacturas/:id", verificarToken, soloAdmin, controladorFactura.eliminarFactura);
+// Ruta /panel (defínela una sola vez y protégela)
+router.get("/panel", requireAuth.requireAuth, async (req, res) => {
+  try {
+    const productos = await controladorProducto.obtenerProductos(); 
+    const empleados = await controladorEmpleado.obtenerEmpleados();
+    const clientes = await controladorCliente.obtenerClientes();  
+    res.render("pages/panel", { productos, empleados, clientes });
+  } catch (error) {
+    console.error("Error al cargar el panel:", error);
+    res.status(500).render("pages/error", { mensaje: "Error al cargar el panel" });
+  }
+});
 
-module.exports = router;
+// Verificación 2FA
+router.post("/verify-2fa", (req, res) => {
+  const { token } = req.body;
+  const verified = speakeasy.totp.verify({
+    secret: req.session.twoFactorSecret,
+    encoding: "base32",
+    token,
+  });
+
+  if (!verified) {
+    return res.render("pages/2fa", {
+      qrCode: null,
+      error: "Código inválido, inténtalo de nuevo.",
+    });
+  }
+
+  // Autenticar sesión y redirigir
+  req.session.authenticated = true;
+  return res.redirect("panel");
+});
+
+
+// Cerrar sesión
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error al cerrar sesión:", err);
+      return res.status(500).send("Error al cerrar sesión");
+    }
+    res.redirect("http://localhost:9090/v1"); // Redirige al login después de cerrar sesión
+  });
+});
+
+
 
 
 module.exports = router;

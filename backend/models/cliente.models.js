@@ -17,11 +17,6 @@ const esquemaCliente = mongoose.Schema({
         required: true,
         minLength: 6
     },
-    rol: {
-        type: String,
-        enum: ["cliente", "admin"], // solo puede ser cliente o admin
-        default: "cliente"
-      },
     fechaRegistro: {
         type: Date,
         default: Date.now

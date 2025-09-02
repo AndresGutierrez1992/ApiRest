@@ -1,0 +1,94 @@
+[2025-08-31T15:51:20.584Z]  Error al obtener productos: Operation `productos.find()` buffering timed out after 10000ms
+[2025-08-31T15:51:24.754Z]  Error al eliminar producto: Operation `productos.findOneAndDelete()` buffering timed out after 10000ms
+[2025-08-31T15:51:28.135Z]  Producto eliminado: Juan (ID: 6898fc6c6da30f43281e02c8)
+[2025-08-31T15:51:55.104Z] Se obtuvieron 1 productos
+[2025-08-31T15:52:23.239Z]  Producto creado: ewwew (ID: 68b46fb71a22adeffe97acc0)
+[2025-08-31T15:52:24.920Z] Se obtuvieron 2 productos
+[2025-08-31T15:52:42.053Z]  Producto eliminado: ewwew (ID: 68b46fb71a22adeffe97acc0)
+[2025-08-31T15:52:46.938Z] Se obtuvieron 1 productos
+[2025-08-31T15:53:03.612Z] Se obtuvieron 1 productos
+[2025-08-31T15:53:03.732Z] 📋 Se consultaron todos los empleados (total: 1)
+[2025-08-31T15:53:04.182Z]  Se consultaron todos los clientes (total: 7)
+[2025-08-31T15:53:40.647Z] 📋 Se consultaron todos los empleados (total: 1)
+[2025-08-31T15:53:57.420Z] ✏️ Empleado actualizado: ñeñe (ID: 68b46e1a60a9788df417cf3a)
+[2025-08-31T15:54:00.741Z] 📋 Se consultaron todos los empleados (total: 1)
+[2025-08-31T15:55:27.713Z] ❌ Error al crear empleado: E11000 duplicate key error collection: PetMarket.empleados index: email_1 dup key: { email: null }
+[2025-08-31T15:55:47.843Z] ❌ Error al crear empleado: E11000 duplicate key error collection: PetMarket.empleados index: email_1 dup key: { email: null }
+[2025-08-31T15:56:01.202Z] ❌ Error al crear empleado: E11000 duplicate key error collection: PetMarket.empleados index: email_1 dup key: { email: null }
+[2025-08-31T15:56:01.705Z] ❌ Error al crear empleado: E11000 duplicate key error collection: PetMarket.empleados index: email_1 dup key: { email: null }
+[2025-08-31T15:58:14.211Z] 📋 Se consultaron todos los empleados (total: 1)
+[2025-08-31T15:59:11.177Z] ❌ Error al crear empleado: E11000 duplicate key error collection: PetMarket.empleados index: email_1 dup key: { email: null }
+[2025-08-31T15:59:12.084Z] ❌ Error al crear empleado: E11000 duplicate key error collection: PetMarket.empleados index: email_1 dup key: { email: null }
+[2025-09-01T15:52:03.319Z] Se obtuvieron 1 productos
+[2025-09-01T15:52:03.432Z] Se consultaron todos los empleados (total: 1)
+[2025-09-01T15:52:03.523Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-01T15:53:42.730Z] Se consultaron todos los empleados (total: 1)
+[2025-09-01T15:53:54.649Z]  Empleado eliminado: ñeñe (ID: 68b46e1a60a9788df417cf3a)
+[2025-09-01T15:53:56.567Z] Se consultaron todos los empleados (total: 0)
+[2025-09-01T15:55:23.461Z] Se consultaron todos los empleados (total: 0)
+[2025-09-01T15:55:52.110Z] Se consultaron todos los empleados (total: 0)
+[2025-09-01T15:57:16.971Z] Se obtuvieron 1 productos
+[2025-09-01T15:57:17.065Z] Se consultaron todos los empleados (total: 0)
+[2025-09-01T15:57:17.181Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-01T15:57:20.126Z] Se obtuvieron 1 productos
+[2025-09-01T15:58:48.073Z] Se obtuvieron 1 productos
+[2025-09-01T15:59:09.305Z] Se obtuvieron 1 productos
+[2025-09-01T15:59:33.979Z] Se obtuvieron 1 productos
+[2025-09-01T15:59:34.195Z] Se consultaron todos los empleados (total: 0)
+[2025-09-01T15:59:34.611Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-01T15:59:55.262Z] Se obtuvieron 1 productos
+[2025-09-01T15:59:55.353Z] Se consultaron todos los empleados (total: 0)
+[2025-09-01T15:59:55.445Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-01T15:59:57.391Z] Se obtuvieron 1 productos
+[2025-09-01T16:00:13.244Z] Se obtuvieron 1 productos
+[2025-09-01T16:00:13.557Z] Se consultaron todos los empleados (total: 0)
+[2025-09-01T16:00:13.667Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-01T16:00:15.609Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T15:12:19.091Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T15:12:23.277Z] Se obtuvieron 1 productos
+[2025-09-02T15:12:26.983Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T15:13:19.422Z] Se obtuvieron 1 productos
+[2025-09-02T15:23:09.818Z]  Error al obtener productos: Operation `productos.find()` buffering timed out after 10000ms
+[2025-09-02T15:23:41.435Z]  Error al obtener productos: Operation `productos.find()` buffering timed out after 10000ms
+[2025-09-02T15:30:39.974Z] Se obtuvieron 1 productos
+[2025-09-02T15:30:40.073Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T15:30:40.164Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T16:01:19.475Z] Se obtuvieron 1 productos
+[2025-09-02T16:01:19.577Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T16:01:19.675Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T16:44:58.340Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T16:48:47.748Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T16:51:25.617Z] Se obtuvieron 1 productos
+[2025-09-02T16:51:25.710Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T16:51:25.799Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T16:51:32.586Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T16:51:35.553Z] Se obtuvieron 1 productos
+[2025-09-02T16:51:35.636Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T16:51:35.719Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T16:51:37.717Z] Se obtuvieron 1 productos
+[2025-09-02T16:51:54.930Z] ✏️ Producto actualizado: jajajaja (ID: 68b46ee317a49e05ca162775)
+[2025-09-02T16:51:56.910Z] Se obtuvieron 1 productos
+[2025-09-02T17:04:42.426Z] Se obtuvieron 1 productos
+[2025-09-02T17:04:42.522Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:04:42.624Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T17:08:55.659Z] Se obtuvieron 1 productos
+[2025-09-02T17:08:55.767Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:08:55.868Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T17:11:19.299Z] Se obtuvieron 1 productos
+[2025-09-02T17:11:19.408Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:11:19.572Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T17:12:42.236Z] Se obtuvieron 1 productos
+[2025-09-02T17:12:42.334Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:12:42.422Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T17:14:13.912Z] Se obtuvieron 1 productos
+[2025-09-02T17:14:14.004Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:14:14.094Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T17:15:53.202Z] Se obtuvieron 1 productos
+[2025-09-02T17:15:53.314Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:15:53.413Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T17:17:13.427Z] Se obtuvieron 1 productos
+[2025-09-02T17:17:13.517Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:17:13.599Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T17:19:41.635Z] Se obtuvieron 1 productos
+[2025-09-02T17:19:41.739Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:19:41.829Z]  Se consultaron todos los clientes (total: 6)
