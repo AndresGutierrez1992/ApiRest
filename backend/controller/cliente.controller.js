@@ -1,49 +1,64 @@
 const modeloCliente = require("../models/cliente.models");
-const log = require("../log"); //  Importamos el logger
+const log = require("../log"); // logger
 
-// Crear cliente (Admin)
+
+// Crear cliente
 exports.crearCliente = async (req, res) => {
   try {
-    const { correo, contrasena, rol } = req.body;
+    const { correo, contrasena } = req.body;
 
+    // 1️Validar campos vacíos
+    if (!correo || !contrasena) {
+      return res.status(400).json({
+        success: false,
+        message: "El correo y la contraseña son obligatorios",
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // 2️Verificar si ya existe un cliente con ese correo
+    const clienteExistente = await modeloCliente.findOne({ correo });
+    if (clienteExistente) {
+      return res.status(409).json({
+        success: false,
+        message: "El correo ya está registrado",
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // 3️Crear cliente nuevo
     const nuevoCliente = new modeloCliente({
       correo,
       contrasena,
-      rol: rol || "cliente"
     });
 
     await nuevoCliente.save();
 
-    log(` Cliente creado (Admin): ${nuevoCliente.correo} (ID: ${nuevoCliente._id}, Rol: ${nuevoCliente.rol})`);
+    log(`Cliente creado: ${nuevoCliente.correo} (ID: ${nuevoCliente._id})`);
 
-    res.status(201).json({ mensaje: "Cliente registrado correctamente", cliente: nuevoCliente });
-  } catch (error) {
-    log(` Error al crear cliente (Admin): ${error.message}`);
-    res.status(400).json({ mensaje: "Error al registrar cliente", error: error.message });
-  }
-};
-
-//  Crear cliente público (registro desde la página)
-exports.crearClientePublico = async (req, res) => {
-  try {
-    const { correo, contrasena, rol } = req.body;
-
-    const nuevoCliente = new modeloCliente({
-      correo,
-      contrasena,
-      rol: rol || "cliente"
+    return res.status(201).json({
+      success: true,
+      message: "Cliente registrado correctamente",
+      cliente: {
+        id: nuevoCliente._id,
+        correo: nuevoCliente.correo,
+      },
+      timestamp: new Date().toISOString()
     });
 
-    await nuevoCliente.save();
-
-    log(` Cliente registrado desde la web: ${nuevoCliente.correo} (ID: ${nuevoCliente._id})`);
-
-    res.status(201).json({ mensaje: "Cliente registrado correctamente", cliente: nuevoCliente });
   } catch (error) {
-    log(` Error al registrar cliente público: ${error.message}`);
-    res.status(400).json({ mensaje: "Error al registrar cliente", error: error.message });
+    log(`Error al crear cliente: ${error.message}`);
+    return res.status(500).json({
+      success: false,
+      message: "Error interno al registrar el cliente",
+      details: error.message,
+      timestamp: new Date().toISOString()
+    });
   }
 };
+
+
+
 
 //  Obtener todos los clientes
 exports.obtenerClientes = async (req, res) => {
@@ -53,7 +68,13 @@ exports.obtenerClientes = async (req, res) => {
     return clientes;
   } catch (error) {
     log(` Error al obtener clientes: ${error.message}`);
-    res.status(500).json({ error: "Error al obtener clientes" });
+      res.status(400).json({
+      success: false,
+      message: "Error al obtener clientes",
+      details: error.message,
+      timestamp: new Date().toISOString()
+    });
+
   }
 };
 
@@ -63,13 +84,24 @@ exports.obtenerClientePorId = async (req, res) => {
     const cliente = await modeloCliente.findById(req.params.id);
     if (!cliente) {
       log(` Cliente no encontrado (ID: ${req.params.id})`);
-      return res.status(404).json({ error: "Cliente no encontrado" });
+      return res.status(404).json({
+        success: false,
+        message: "Cliente no encontrado",
+        details: error.message,
+        timestamp: new Date().toISOString()
+      });
+
     }
     log(` Cliente consultado: ${cliente.correo} (ID: ${cliente._id})`);
     res.json(cliente);
   } catch (error) {
     log(` Error al obtener cliente: ${error.message}`);
-    res.status(500).json({ error: "Error al obtener cliente" });
+        res.status(500).json({
+        success: false,
+        message: "Error al obtener el cliente",
+        details: error.message,
+        timestamp: new Date().toISOString()
+      });
   }
 };
 
@@ -83,13 +115,23 @@ exports.actualizarCliente = async (req, res) => {
     );
     if (!clienteActualizado) {
       log(` No se pudo actualizar: cliente no encontrado (ID: ${req.params.id})`);
-      return res.status(404).json({ error: "Cliente no encontrado" });
+      return res.status(404).json({
+        success: false,
+        message: "Cliente no encontrado",
+        details: error.message,
+        timestamp: new Date().toISOString()
+      });
     }
     log(` Cliente actualizado: ${clienteActualizado.correo} (ID: ${clienteActualizado._id})`);
     res.json(clienteActualizado);
   } catch (error) {
     log(` Error al actualizar cliente: ${error.message}`);
-    res.status(500).json({ error: "Error al actualizar cliente" });
+        res.status(500).json({
+        success: false,
+        message: "Error al actualizar el cliente",
+        details: error.message,
+        timestamp: new Date().toISOString()
+      });
   }
 };
 
@@ -99,12 +141,22 @@ exports.eliminarCliente = async (req, res) => {
     const clienteEliminado = await modeloCliente.findByIdAndDelete(req.params.id);
     if (!clienteEliminado) {
       log(` No se pudo eliminar: cliente no encontrado (ID: ${req.params.id})`);
-      return res.status(404).json({ error: "Cliente no encontrado" });
+      return res.status(404).json({
+        success: false,
+        message: "Cliente no encontrado",
+        details: error.message,
+        timestamp: new Date().toISOString()
+      });
     }
     log(`Cliente eliminado: ${clienteEliminado.correo} (ID: ${clienteEliminado._id})`);
     res.json({ mensaje: "Cliente eliminado", cliente: clienteEliminado });
   } catch (error) {
     log(` Error al eliminar cliente: ${error.message}`);
-    res.status(500).json({ error: "Error al eliminar cliente" });
+    res.status(500).json({
+      success: false,
+      message: "Error al eliminar el cliente",
+      details: error.message,
+      timestamp: new Date().toISOString()
+    });
   }
 };

@@ -30,9 +30,9 @@ router.get("/nosotros", (req, res) => {
   res.render("pages/nosotros");
 });
 
-
-
-
+router.get("/register", (req, res) => {
+  res.render("pages/register");
+});
 
 
 
@@ -80,7 +80,7 @@ router.get("/gestionClientes", requireAuth.requireAuth, async (req, res) => {
     res.status(500).render("pages/error", { mensaje: "Error al cargar clientes" });
   }
 });
-router.post("/gestionClientesPublico",requireAuth.requireAuth,controladorCliente.crearClientePublico);
+router.post("/gestionClientesPublico",controladorCliente.crearCliente);
 router.post("/gestionClientes",requireAuth.requireAuth,controladorCliente.crearCliente);
 router.put("/gestionClientes/:id",requireAuth.requireAuth,controladorCliente.actualizarCliente);
 router.delete("/gestionClientes/:id",requireAuth.requireAuth,controladorCliente.eliminarCliente);
@@ -232,11 +232,8 @@ router.get("/logout", (req, res) => {
       console.error("Error al cerrar sesión:", err);
       return res.status(500).send("Error al cerrar sesión");
     }
-    res.redirect("http://localhost:9090/v1"); // Redirige al login después de cerrar sesión
+    res.redirect("http://localhost:9090/v1"); // Redirige al landin después de cerrar sesión
   });
 });
-
-
-
 
 module.exports = router;

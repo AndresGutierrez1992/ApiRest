@@ -92,3 +92,24 @@
 [2025-09-02T17:19:41.635Z] Se obtuvieron 1 productos
 [2025-09-02T17:19:41.739Z] Se consultaron todos los empleados (total: 0)
 [2025-09-02T17:19:41.829Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-02T17:29:43.349Z] Se obtuvieron 1 productos
+[2025-09-02T17:29:43.667Z] Se consultaron todos los empleados (total: 0)
+[2025-09-02T17:29:43.761Z]  Se consultaron todos los clientes (total: 6)
+[2025-09-03T16:19:44.171Z]  Error al crear cliente (Admin): cliente validation failed: correo: Path `correo` is required., contrasena: Path `contrasena` is required.
+[2025-09-03T16:23:03.722Z]  Error al crear cliente (Admin): cliente validation failed: correo: Path `correo` is required., contrasena: Path `contrasena` is required.
+[2025-09-03T16:27:53.175Z]  Error al crear cliente (Admin): cliente validation failed: correo: Path `correo` is required., contrasena: Path `contrasena` is required.
+[2025-09-03T16:41:03.737Z]  Error al crear cliente (Admin): cliente validation failed: correo: Path `correo` is required., contrasena: Path `contrasena` is required.
+[2025-09-03T16:42:00.335Z]  Error al crear cliente (Admin): cliente validation failed: correo: Path `correo` is required., contrasena: Path `contrasena` is required.
+[2025-09-03T16:42:34.613Z]  Error al crear cliente (Admin): cliente validation failed: correo: Path `correo` is required., contrasena: Path `contrasena` is required.
+[2025-09-03T16:45:23.435Z]  Error al crear cliente (Admin): cliente validation failed: correo: Path `correo` is required., contrasena: Path `contrasena` is required.
+[2025-09-03T16:47:34.857Z]  Cliente creado (Admin): locario@gmail.com (ID: 68b871269f16df8bde702852)
+[2025-09-04T15:13:27.381Z]  Error al crear cliente (Admin): E11000 duplicate key error collection: PetMarket.clientes index: email_1 dup key: { email: null }
+[2025-09-04T15:21:11.850Z]  Error al crear cliente (Admin): E11000 duplicate key error collection: PetMarket.clientes index: email_1 dup key: { email: null }
+[2025-09-04T15:21:18.701Z]  Error al crear cliente (Admin): E11000 duplicate key error collection: PetMarket.clientes index: email_1 dup key: { email: null }
+[2025-09-04T15:21:24.935Z]  Error al crear cliente (Admin): E11000 duplicate key error collection: PetMarket.clientes index: email_1 dup key: { email: null }
+[2025-09-04T15:21:31.308Z]  Error al crear cliente (Admin): E11000 duplicate key error collection: PetMarket.clientes index: email_1 dup key: { email: null }
+[2025-09-04T15:31:50.753Z]  Error al crear cliente (Admin): cliente validation failed: contrasena: Path `contrasena` (`o0o0`) is shorter than the minimum allowed length (6).
+[2025-09-04T15:34:09.966Z]  Error al crear cliente (Admin): cliente validation failed: contrasena: Path `contrasena` (`1010`) is shorter than the minimum allowed length (6).
+[2025-09-04T15:54:21.023Z]  Error al crear cliente (Admin): cliente validation failed: contrasena: Path `contrasena` (`0000`) is shorter than the minimum allowed length (6).
+[2025-09-04T16:11:55.405Z] ❌ Error al crear cliente: cliente validation failed: contrasena: Path `contrasena` (`o0o0`) is shorter than the minimum allowed length (6).
+[2025-09-04T16:12:04.276Z] ❌ Error al crear cliente: E11000 duplicate key error collection: PetMarket.clientes index: email_1 dup key: { email: null }

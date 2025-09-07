@@ -5,3 +5,5 @@ function reloadCaptcha() {
             document.getElementById('cap').innerHTML = svg;
         });
 }
+
+reloadCaptcha();
